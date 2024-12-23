@@ -1,0 +1,12 @@
+langchain
+langchain_community
+tiktoken
+langchain-nomic
+nomic
+langchain-ollama
+scikit-learn
+langgraph
+beautifulsoup4
+PyPDF
+langchain-chroma
+streamlit
