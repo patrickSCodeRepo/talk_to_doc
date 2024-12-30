@@ -7,7 +7,8 @@ from langchain_nomic.embeddings import NomicEmbeddings
 # Expand user in file paths
 path = os.path.expanduser('~/Ottoman.pdf')
 # path = ""
-save_dir = os.path.expanduser('./vectorstore/ottoman')
+rag_app_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+save_dir = os.path.join(rag_app_dir, 'ottoman_vectorstore')
 
 # Load the local PDF file if PDF
 

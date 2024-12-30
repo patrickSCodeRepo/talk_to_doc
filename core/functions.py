@@ -5,9 +5,11 @@ from core.puller import *
 from core.prompts import *
 
 ### LLM
-local_llm = "llama3.2:3b-instruct-fp16"
+local_llm = 'falcon3:7b-instruct-q8_0'
+# local_llm = "falcon3:3b-instruct-fp16"
+local_llm_hallucinate = "llama3.2:3b-instruct-fp16"
 llm = ChatOllama(model=local_llm, temperature=0)
-llm_json_mode = ChatOllama(model=local_llm, temperature=0, format="json")
+llm_json_mode = ChatOllama(model=local_llm_hallucinate, temperature=0, format="json")
 
 ### Nodes
 def retrieve(state):
@@ -152,7 +154,7 @@ def decide_to_generate(state):
     loop_step = state["loop_step"]
 
     if loop_step < max_loops:
-        if failed_docs > 3:
+        if failed_docs > 5:
             # All documents have been filtered check_relevance
             # We will re-generate a new query
             print("---DECISION: NOT ALL DOCUMENTS ARE RELEVANT TO QUESTION, TRYING AGAIN---")
@@ -224,7 +226,7 @@ def regenerate_answer(state):
         grader_explanation = state["bad_explanation"]
         documents = state["documents"]
 
-        print(question, "\n", generation, "\n", grader_explanation, "\n", documents, "\n")
+        # print(question, "\n", generation, "\n", grader_explanation, "\n", documents, "\n")
 
         refined_answer = llm.invoke(
             [SystemMessage(content=answer_refiner_instructions)]
