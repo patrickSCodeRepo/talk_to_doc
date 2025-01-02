@@ -10,3 +10,4 @@ beautifulsoup4
 PyPDF
 langchain-chroma
 streamlit
+ollama
